@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.nyan.paginationexample.R;
-import com.nyan.paginationexample.model.Cost;
+import com.nyan.paginationexample.model.response.Cost;
 import java.util.ArrayList;
 import java.util.List;
 

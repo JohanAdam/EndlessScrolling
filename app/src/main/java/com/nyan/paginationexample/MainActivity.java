@@ -14,8 +14,8 @@ import com.nyan.paginationexample.adapter.PaginationAdapter;
 import com.nyan.paginationexample.adapter.PaginationScrollListener;
 import com.nyan.paginationexample.api.ApiService;
 import com.nyan.paginationexample.api.CostApi;
-import com.nyan.paginationexample.model.Cost;
-import com.nyan.paginationexample.model.ResponseModel;
+import com.nyan.paginationexample.model.response.Cost;
+import com.nyan.paginationexample.model.response.ResponseModel;
 import com.nyan.paginationexample.model.request.RequestDataModel;
 import com.nyan.paginationexample.model.request.RequestModel;
 import java.util.List;
@@ -52,31 +52,6 @@ public class MainActivity extends AppCompatActivity {
 
     rv = findViewById(R.id.rv);
     progressBar = findViewById(R.id.progressBar);
-
-//    final List<GGModel> startingList = GGModel.createList(10 , 0);
-//
-//    final ListAdapter adapter = new ListAdapter(startingList);
-//    rv.setAdapter(adapter);
-//    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-//    rv.setLayoutManager(linearLayoutManager);
-//    EndlessRecyclerViewScrollListener scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
-//      @Override
-//      public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-//        Log.e("e", "onLoadMore page " + page + "tIc " + totalItemsCount);
-//
-//        List<GGModel> moarList = GGModel.createList(10, page);
-//        final int curSize = adapter.getItemCount();
-//        startingList.addAll(moarList);
-//
-//        view.post(new Runnable() {
-//          @Override
-//          public void run() {
-//            adapter.notifyItemRangeInserted(curSize, startingList.size() - 1);
-//          }
-//        });
-//      }
-//    };
-//    rv.addOnScrollListener(scrollListener);
 
     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
     rv.setLayoutManager(linearLayoutManager);

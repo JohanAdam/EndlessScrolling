@@ -1,5 +1,5 @@
 
-package com.nyan.paginationexample.model;
+package com.nyan.paginationexample.model.response;
 
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
