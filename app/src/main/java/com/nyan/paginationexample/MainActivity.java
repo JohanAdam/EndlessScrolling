@@ -97,8 +97,7 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
           @Override
           public void run() {
-            //Do something after 100ms
-            loadNextPage();
+            loadPage();
           }
         }, 10000);
       }
@@ -120,7 +119,8 @@ public class MainActivity extends AppCompatActivity {
     });
 
     apiService = CostApi.getClient().create(ApiService.class);
-    loadFirstPage();
+//    loadFirstPage();
+    loadPage();
   }
 
   /**
@@ -148,48 +148,19 @@ public class MainActivity extends AppCompatActivity {
     return responseModel.getReturn().getCosts();
   }
 
-  private void loadFirstPage() {
-    Log.e("e", "loadFirstPage");
-    callLastMileApi().enqueue(new Callback<ResponseModel>() {
-      @Override
-      public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
-        Log.e("e", "onResponse loaded " + response.body().getReturn().getCosts().size());
-
-        TOTAL_ITEM_COST = response.body().getReturn().getTotalCost();
-
-        List<Cost> costList = fetchResults(response);
-        progressBar.setVisibility(View.GONE);
-        adapter.addAll(costList);
-
-        //Increment page index to load the next one.
-        currentOffset = currentOffset + adapter.getItemCount();
-        Log.e("e","currentOffset " + currentOffset);
-
-        if (adapter.getItemCount() >= TOTAL_ITEM_COST) {
-          isLastPage = true;
-        } else {
-          adapter.addLoadingFooter();
-        }
-
-      }
-
-      @Override
-      public void onFailure(Call<ResponseModel> call, Throwable t) {
-        Log.e("e", "onFailure");
-        t.printStackTrace();
-        Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-      }
-    });
-  }
-
-  private void loadNextPage() {
-    Log.e("e", "loadNextPage");
+  private void loadPage() {
+    Log.e("e", "loadPage");
     callLastMileApi().enqueue(new Callback<ResponseModel>() {
       @Override
       public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
         Log.e("e", "onResponse");
-        adapter.removeLoadingFooter();
+        progressBar.setVisibility(View.GONE);
+        if (adapter.getItemCount() > 0) {
+          adapter.removeLoadingFooter();
+        }
         isLoading = false;
+
+        TOTAL_ITEM_COST = response.body().getReturn().getTotalCost();
 
         List<Cost> newList = fetchResults(response);
         adapter.addAll(newList);

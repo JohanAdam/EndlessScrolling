@@ -21,6 +21,7 @@ public class CostApi {
       retrofit = new Retrofit.Builder()
           .client(buildClient())
           .addConverterFactory(GsonConverterFactory.create())
+//          .baseUrl("https://terminalapi.thelorry.com")
           .baseUrl("http://terminalapitest.thelorry.com/")
           .build();
     }
